@@ -4,7 +4,7 @@ import passportFacebook from "passport-facebook";
 import _ from "lodash";
 
 // import { User, UserType } from '../models/User';
-import { User, UserDocument } from "../../../moteefe copy/src/models/User";
+import { User, UserDocument } from "../../../moteefe/src/models/User";
 import { Request, Response, NextFunction } from "express";
 
 const LocalStrategy = passportLocal.Strategy;
