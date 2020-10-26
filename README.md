@@ -1,15 +1,11 @@
-# Moteefe exercise
+# Moteefe Coding Challenge
 
-The main purpose of this repository is to show a working Node.js API Server + front-end project and workflow for writing Node code in TypeScript.
-
-It is not a goal to be a comprehensive and definitive guide to making a TypeScript and Node project, but as a working reference maintained by the community. If you are interested in starting a new TypeScript project - check out the bootstrapping tools reference in [the TypeScript Website](https://www.typescriptlang.org/docs/home.html)
-
-
-[![Dependency Status](https://david-dm.org/Microsoft/TypeScript-Node-Starter.svg)](https://david-dm.org/Microsoft/TypeScript-Node-Starter) [![Build Status](https://travis-ci.org/Microsoft/TypeScript-Node-Starter.svg?branch=master)](https://travis-ci.org/Microsoft/TypeScript-Node-Starter)
-
-**Live Demo**: [https://typescript-node-starter.azurewebsites.net/](https://typescript-node-starter.azurewebsites.net/)
-
-![image](https://user-images.githubusercontent.com/820883/36764267-abbdb7f8-1be0-11e8-9678-2a9ea448d7f8.png)
+Moteefe is an international company providing print on demand service. We have various products e.g
+shirts, hoodies, mugs, cushions etc. Our suppliers are spread around the world, therefore the delivery of
+products depend on the region where they are shipped.
+Your task is to implement a solution which gives us a number of days for delivery and the amounts of shipments
+and their details based on the list of items in the basket and the region where those items are supposed to be delivered.
+There might be more shipments as not all suppliers provide all products
 
 
 # Table of contents:
@@ -35,38 +31,18 @@ It is not a goal to be a comprehensive and definitive guide to making a TypeScri
 # Pre-reqs
 To build and run this app locally you will need a few things:
 - Install [Node.js](https://nodejs.org/en/)
-- Install [MongoDB](https://docs.mongodb.com/manual/installation/)
-- Install [VS Code](https://code.visualstudio.com/)
 
 # Getting started
 - Clone the repository
 ```
-git clone --depth=1 https://github.com/Microsoft/TypeScript-Node-Starter.git <project_name>
+git clone --depth=1 https://github.com/ga7o/moteefe.git <project_name>
 ```
 - Install dependencies
 ```
 cd <project_name>
 npm install
 ```
-- Configure your mongoDB server
-```bash
-# create the db directory
-sudo mkdir -p /data/db
-# give the db correct read/write permissions
-sudo chmod 777 /data/db
 
-# starting from macOS 10.15 even the admin cannot create directory at root
-# so lets create the db directory under the home directory.
-mkdir -p ~/data/db
-# user account has automatically read and write permissions for ~/data/db.
-```
-- Start your mongoDB server (you'll probably want another command prompt)
-```bash
-mongod
-
-# on macOS 10.15 or above the db directory is under home directory
-mongod --dbpath ~/data/db
-```
 - Build and run the project
 ```
 npm run build
@@ -95,83 +71,11 @@ There are many different providers, but the easiest one to get started with is [
 - **SendGrid Account** -
 If you don't have one, you can sign up for free, we will need it to send emails. There are many different providers that Nodemailer supports ([Well-known services](https://nodemailer.com/smtp/well-known/)), we'll be using [SendGrid](#sendgrid).
 
-### <a name="mlab"></a> Create a managed MongoDB with MongoLab
-1. Navigate to [MongoLab's Website](https://mlab.com/), sign up for a free account, and then log in.
-2. In the **MongoDB Deployments** section, click the **Create New** button.
-3. Select any provider (I recommend **Microsoft Azure** as it provides an easier path to upgrading to globally distributed instances later).
-4. Select **Sandbox** to keep it free unless you know what you're doing, and hit **Continue**.
-5. Select a region (I recommend the region geographically closest to your app's users).
-6. Add a name, click **Continue** again, and finally **Submit Order**.
-7. Once your new database is created, select it from the **MongoDB Deployments** section.
-8. Create a user by selecting the **User** tab, clicking the **Add database user** button, adding a username and password, and then clicking **Create**.
-A user account is required to connect to the database, so remember these values because you will need them as part of your connection string.
-9. Copy the connection string from the top of the page, it should look like this: `mongodb://<dbuser>:<dbpassword>@ds036069.mlab.com:36069/test-asdf`
-and replace `<dbUser>` and `<dbpassword>` with the credentials you just created.
-Back in your project, open your `.env` file and update `MONGODB_URI` with your new connection string.
-    > NOTE! - If you don't have an `.env` file yet, rename `.env.example` to `.env` and follow the comments to update the values in that file.
-10. **Success!**
-You can test that it works locally by updating `MONGODB_URI_LOCAL` to the same connection string you just updated in `MONGO_URI`.
-After rebuilding/serving, the app should work, but users that were previously created in local testing will not exist in the new database!
-Don't forget to return the `MONGO_URI_LOCAL` to your local test database (if you so desire).
-
-### <a name="sendgrid"></a> SendGrid Account
-1. Navigate to [SendGrid's Website](https://sendgrid.com/), sign up for a free account, and complete the verification process.
-2. Open your `.env` file and update `SENDGRID_USERNAME` and `SENDGRID_PASSWORD` with your SendGrid username and password respectively.
-
-## Deploying to Azure App Service
-Deploying from VS Code can be broken into the following steps:
-1. Authenticate your Azure account in VS Code
-2. Build your app
-3. Zip deploy using the Azure App Service extension
-
-### Sign in to your Azure account
-1. Open VS Code
-2. Expand the Azure App Service menu in the explorer menu
-    - If you don't see this, you might not have the `Azure App Service` extension installed.
-    See the pre-reqs section.
-3. Click `Sign in to Azure...`
-4. Choose `Copy & Open` from the resulting dialog
-    - This will open `aka.ms/devicelogin` in a browser window.
-    If it doesn't, just navigate there manually.
-5. Paste in the code that is on your clipboard.
-6. Go back to VS Code, you should now be signed in.
-You can confirm that everything worked by seeing your Azure subscription listed in the Azure App Service section of the explorer window.
-Additionally you should see the email associated with your account listed in the status bar at the bottom of VS Code.
-
 ### Build the app
 Building the app locally is required to generate a zip to deploy because the App Service won't execute build tasks.
 Build the app however you normally would:
 - `ctrl + shift + b` - kicks off default build in VS Code
 - execute `npm run build` from a terminal window
-
-### Zip deploy from VS Code
-1. Make sure your app is built, whatever is currently in your `dist` and `node_modules` folders will be the app that is deployed.
-2. Click the blue up arrow (Deploy to Web App) on the Azure App Service section of the explorer window.
-3. Choose the entire project directory.
-If you haven't changed the name, this will be `TypeScript-Node-Starter`.
-4. Choose the subscription you want this app to be billed to (don't worry, it will be free).
-5. Choose `Create New Web App`
-6. Enter a globally unique name -
-This will be part of the URL that azure generates so it has to be unique, but if you're planning on adding a custom domain later, it's not that important. I usually just add random numbers to the end of the app name, ie. typescript-node-starter-15121214.
-7. Choose a resource group -
-If you don't know what this is, just create a new one.
-If you have lots of cloud resources that should be logically grouped together (think an app service and a database that supports that app) then you would want to put them in the same resource group.
-This can always be updated later though.
-If you create a new resource group, you'll also be prompted to pick a location for that group.
-Pick something geographically close to where your users are.
-8. Choose `Create new App Service Plan` -
-An app service plan mainly is what determines the size and cost of the hardware your app will run on, but it also manages some other settings which we can ignore for now.
-9. Choose `B1 - Basic` - This one is free.
-If you know what you're doing, feel free to select a stronger pricing tier.
-10. Choose your target node runtime version - We are deploying to Linux machines, and in addition we can choose the exact node runtime we want.
-If you don't know what you want, choose whatever the current LTS build is.
-11. Grab a cup of coffee - You'll see everything you just selected getting created in the output window.
-All of this is powered by the [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/overview?view=azure-cli-latest) and can be easily replicated if you decide you want to customize this process.
-This deployment is not the fastest option (but it is the easiest!). We are literally bundling everything in your project (including the massive node_modules folder) and uploading it to our Azure app service. Times will vary, but as a baseline, my deployment took roughly 6 minutes.
-12. Add `NODE_ENV` environment variable - In the App Service section of the explorer window, expand the newly created service, right click on **Application Settings**, select **Add New Settings...**, and add `NODE_ENV` as the key and `production` as the value.
-This setting determines which database to point to.
-If you haven't created a cloud database yet, see [the setup instructions](#mlab).
-13. Profit! If everything worked you should see a page that looks like this: [TypeScript Node Starter Demo Site](https://typescript-node-starter.azurewebsites.net/)
 
 ### Troubleshooting failed deployments
 Deployment can fail for various reasons, if you get stuck with a page that says *Service Unavailable* or some other error, [open an issue](https://github.com/Microsoft/TypeScript-Node-Starter/issues/new) and I'll try to help you resolve the problems.
@@ -544,17 +448,6 @@ Notice that ESLint is not a part of the main watch task.
 
 If you are interested in seeing ESLint feedback as soon as possible, I strongly recommend the [VS Code ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint).
 
-### VSCode Extensions
-
-To enhance your development experience while working in VSCode we also provide you a list of the suggested extensions for working with this project:
-
-![Suggested Extensions In VSCode](https://user-images.githubusercontent.com/14539/34583539-6f290a30-f198-11e7-8804-30f40d418e20.png)
-
-- [VS Code ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
-- [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
-- [Azure Cosmos DB](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-cosmosdb)
-- [Azure App Service](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureappservice)
-
 # Dependencies
 Dependencies are managed through `package.json`.
 In that file you'll find two sections:
@@ -606,8 +499,6 @@ In that file you'll find two sections:
 
 To install or update these dependencies you can use `npm install` or `npm update`.
 
-# Hackathon Starter Project
-A majority of this quick start's content was inspired or adapted from Sahat's excellent [Hackathon Starter project](https://github.com/sahat/hackathon-starter).
 
 ## License
 Copyright (c) Microsoft Corporation. All rights reserved.

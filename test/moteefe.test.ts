@@ -2,19 +2,18 @@ import request from "supertest";
 import app from "../src/app";
 import { expect} from "chai";
 
-describe("GET /contact", () => {
+describe("GET /moteefe", () => {
     it("should return 200 OK", (done) => {
-        request(app).get("/contact")
+        request(app).get("/moteefe")
             .expect(200, done);
     });
 });
 
-
-describe("POST /contact", () => {
-    it("should return false from assert when no message is found", (done) => {
-        request(app).post("/contact")
-            .field("name", "John Doe")
-            .field("email", "john@me.com")
+/* TODO: finish the test
+describe("POST /moteefe", () => {
+    it("should return false from assert when no region is found", (done) => {
+        request(app).post("/moteefe")
+            .field("", "")
             .end(function(err, res) {
                 expect(res.error).to.be.false;
                 done();
@@ -23,3 +22,4 @@ describe("POST /contact", () => {
 
     });
 });
+*/

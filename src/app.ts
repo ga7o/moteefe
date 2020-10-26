@@ -16,9 +16,6 @@ const MongoStore = mongo(session);
 // Controllers (route handlers)
 import * as moteefeController from "./controllers/moteefe";
 
-// API keys and Passport configuration
-import * as passportConfig from "./config/passport";
-
 // Create Express server
 const app = express();
 
